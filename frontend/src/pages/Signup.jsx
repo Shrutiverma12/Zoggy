@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { signupUser } from '../services/authApi';
+import { toast } from 'react-toastify';
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -9,13 +11,19 @@ const Signup = () => {
   });
 
   const handleChange = (event) => {
-    console.log(event.target.value, 'name is', event.target.name);
     setFormData({ ...formData, [event.target.name]: event.target.value });
-    console.log(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    try {
+      const data = await signupUser(formData);
+      toast.success('Signup sucessfully');
+      console.log('Signup sucessfully', data);
+    } catch (error) {
+      toast.error('Signup failed');
+      console.log('Signup failed', error);
+    }
   };
 
   return (
@@ -30,7 +38,8 @@ const Signup = () => {
             type='text'
             required
             name='name'
-            onClick={handleChange}
+            onChange={handleChange}
+            value={formData.name}
           />
         </div>
         <div>
@@ -41,7 +50,8 @@ const Signup = () => {
             type='email'
             required
             name='email'
-            onClick={handleChange}
+            onChange={handleChange}
+            value={formData.email}
           />
         </div>
         <div>
@@ -52,14 +62,14 @@ const Signup = () => {
             type='password'
             required
             name='password'
-            onClick={handleChange}
+            onChange={handleChange}
           />
         </div>
         <div>
           <label className='font-medium block text-sm'>Role</label>
           <select
             className='mt-1 w-full rounded border border-stone-300 px-3 py-2 focus:border-amber-600 focus:outline-none'
-            onClick={handleChange}
+            onChange={handleChange}
             name='role'
           >
             <option value='customer'>Customer</option>
