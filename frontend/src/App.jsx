@@ -15,7 +15,7 @@ function App() {
       <main className='px-4 py-8 mx-auto'>
         <Routes>
           <Route path='/signup' element={<Signup />} />
-          <Route path='/login' element={<Signin />} />
+          <Route path='/signin' element={<Signin />} />
           <Route path='/' element={<Home />} />
         </Routes>
       </main>

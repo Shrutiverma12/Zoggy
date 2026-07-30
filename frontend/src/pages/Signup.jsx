@@ -27,8 +27,10 @@ const Signup = () => {
   };
 
   return (
-    <section className='rounded bg-white shadow-md w-[40%] m-auto p-8'>
-      <h1 className='mb-4 text-2xl font-bold'>Create your account</h1>
+    <section className='rounded bg-white shadow-md w-[50%] m-auto p-8'>
+      <h1 className='mb-4 text-2xl font-bold text-center'>
+        Create your account
+      </h1>
       <form onSubmit={handleSubmit} className='space-y-4'>
         <div>
           <label className='font-medium block text-sm'>Name</label>
@@ -57,7 +59,7 @@ const Signup = () => {
         <div>
           <label className='font-medium block text-sm'>Password</label>
           <input
-            className='mt-1 w-full rounded border border-stone-300 px-3 py-2 focus:border-amber-600 focus:outline-none'
+            className='mt-1 w-full rounded border border-stone-300 px-3 py-2 focus:border-amber-600 focus:outline-none '
             placeholder='Enter your password'
             type='password'
             required
