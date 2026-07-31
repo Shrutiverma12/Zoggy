@@ -44,7 +44,13 @@ export const signin = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: '1hr' },
     );
-    return res.status(200).json({ message: 'Login Successful', token });
+    return res
+      .status(200)
+      .json({
+        message: 'Login Successful',
+        user: { id: user._id, name: user.name, role: user.role },
+        token,
+      });
   } catch (error) {
     console.log(error);
   }

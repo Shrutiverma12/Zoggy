@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { signinUser } from '../services/authApi';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import AuthContext from '../contexts/AuthContext';
 
 const Signin = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +12,8 @@ const Signin = () => {
 
   const navigate = useNavigate();
 
+  const { saveAuth } = useContext(AuthContext);
+
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
@@ -18,6 +21,7 @@ const Signin = () => {
     event.preventDefault();
     try {
       const data = await signinUser(formData);
+      saveAuth(data.user, data.token);
       toast.success('Login Sucesful');
       navigate('/');
     } catch (error) {
