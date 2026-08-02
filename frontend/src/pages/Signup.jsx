@@ -75,7 +75,7 @@ const Signup = () => {
             name='role'
           >
             <option value='customer'>Customer</option>
-            <option value='restuarant'>Restuarant</option>
+            <option value='restaurant'>Restaurant</option>
           </select>
         </div>
         <button

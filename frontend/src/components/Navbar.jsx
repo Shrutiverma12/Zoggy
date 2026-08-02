@@ -13,8 +13,8 @@ const Navbar = () => {
           <Link to='/' className='hover:text-orange-600'>
             Home
           </Link>
-          {user?.role == 'restuarant' && (
-            <Link to='/restuarant/create'>Create Restuarant</Link>
+          {user?.role == 'restaurant' && (
+            <Link to='/restaurant/create'>Create restaurant</Link>
           )}
           {user ? (
             <>

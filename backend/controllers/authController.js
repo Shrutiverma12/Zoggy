@@ -8,7 +8,7 @@ export const signup = async (req, res) => {
     if (!name || !email || !password) {
       return res.status(400).json({ message: 'Please add all field' });
     }
-    if (role != 'customer' && role != 'restuarant') {
+    if (role != 'customer' && role != 'restaurant') {
       return res.status(400).json({ message: 'Role must be proper' });
     }
 
@@ -44,13 +44,11 @@ export const signin = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: '1hr' },
     );
-    return res
-      .status(200)
-      .json({
-        message: 'Login Successful',
-        user: { id: user._id, name: user.name, role: user.role },
-        token,
-      });
+    return res.status(200).json({
+      message: 'Login Successful',
+      user: { id: user._id, name: user.name, role: user.role },
+      token,
+    });
   } catch (error) {
     console.log(error);
   }
