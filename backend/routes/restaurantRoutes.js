@@ -2,6 +2,7 @@ import express from 'express';
 import {
   createRestaurant,
   getRestaurant,
+  getRestaurantById,
 } from '../controllers/restaurantController.js';
 
 const router = express.Router();
@@ -12,7 +13,7 @@ router.get('/my', () => {});
 
 router.post('/', createRestaurant);
 
-router.put('/:id', () => {});
+router.get('/:id', getRestaurantById);
 
 router.delete('/:id', () => {});
 

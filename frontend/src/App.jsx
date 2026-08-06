@@ -5,6 +5,7 @@ import Signup from './pages/Signup';
 import Signin from './pages/Signin';
 import { ToastContainer } from 'react-toastify';
 import Home from './pages/Home';
+import RestaurantDetails from './components/RestaurantDetails';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       </div>
       <main className='px-4 py-8 mx-auto'>
         <Routes>
+          <Route path='/restaurant/:id' element={<RestaurantDetails />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/signin' element={<Signin />} />
           <Route path='/' element={<Home />} />

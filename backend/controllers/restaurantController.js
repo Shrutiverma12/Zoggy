@@ -31,3 +31,16 @@ export const getRestaurant = async (req, res) => {
     res.status(500).json({ message: 'Server error while fetching restaurant' });
   }
 };
+
+export const getRestaurantById = async (req, res) => {
+  try {
+    const restaurant = await Restaurant.findById(req.params.id).populate(
+      'ownerId',
+      'name email',
+    );
+
+    return res.json(restaurant);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error while fetching restaurant' });
+  }
+};
