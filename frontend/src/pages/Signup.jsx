@@ -19,7 +19,6 @@ const Signup = () => {
     try {
       const data = await signupUser(formData);
       toast.success('Signup sucessfully');
-      console.log('Signup sucessfully', data);
     } catch (error) {
       toast.error('Signup failed');
       console.log('Signup failed', error);

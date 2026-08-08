@@ -44,3 +44,30 @@ export const getRestaurantById = async (req, res) => {
     res.status(500).json({ message: 'Server error while fetching restaurant' });
   }
 };
+
+export const deleteRestaurant = async (req, res) => {
+  try {
+    const id = req.params.id;
+    await Restaurant.findByIdAndDelete(id);
+    res.status(204).json({ message: 'Restaurant remove successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error while deleting restaurant' });
+  }
+};
+
+export const updateRestaurant = async (req, res) => {
+  try {
+    const { name, address, image, description } = req.body;
+    const restaurant = await Restaurant.findByIdAndUpdate(req.params.id, {
+      name: name ?? req.restaurant.name,
+      address: address ?? req.restaurant.address,
+      image: image ?? req.restaurant.image,
+      description: description ?? req.restaurant.description,
+    });
+    console.log('res', restaurant);
+
+    res.json(restaurant);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error while updating restaurant' });
+  }
+};

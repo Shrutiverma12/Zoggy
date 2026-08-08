@@ -2,7 +2,15 @@ import { Food } from '../models/Food.js';
 import { Restaurant } from '../models/Restaurant.js';
 
 export const getFoods = async (req, res) => {
-  const food = Food.fin;
+  try {
+    const food = await Food.find().populate(
+      'restaurantId',
+      'name address image',
+    );
+    res.json(food);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error while fetching food' });
+  }
 };
 
 export const getFoodByID = async (req, res) => {
@@ -26,8 +34,6 @@ export const createFood = async (req, res) => {
   try {
     const { name, price, image, description, restaurantId } = req.body;
     if (!name || !price || !image || !description || !restaurantId) {
-      console.log(name, price, image, description, restaurantId, 'hhhh');
-
       return res.status(400).json({ message: 'Please add proper data' });
     }
 
@@ -62,6 +68,34 @@ export const createFood = async (req, res) => {
   }
 };
 
-export const updateFood = async (req, res) => {};
+export const updateFood = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const { name, price, image, description, restaurantId } = req.body;
+    const food = await Food.findByIdAndUpdate(id, {
+      name: name ?? req.food.name,
+      price: price ?? req.food.price,
+      image: image ?? req.food.image,
+      description: description ?? req.food.description,
+    }).populate('restaurantId', 'name address image');
+    res.send({ message: 'Food updated successfully', food: food });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: 'Server error while deleting food',
+    });
+  }
+};
 
-export const deleteFood = async (req, res) => {};
+export const deleteFood = async (req, res) => {
+  try {
+    const id = req.params.id;
+    await Food.findByIdAndDelete(id);
+    return res.status(204).json({ message: 'Food delete successfully' });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: 'Server error while deleting food',
+    });
+  }
+};

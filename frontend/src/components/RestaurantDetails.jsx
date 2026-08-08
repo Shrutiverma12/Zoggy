@@ -14,7 +14,6 @@ const RestaurantDetails = () => {
         const restaurantData = await getRestaurantById({ id });
         const foodData = await getRestaurant();
         setRestaurant(restaurantData);
-
         setFood(foodData);
       } catch (error) {
         console.log(error);
